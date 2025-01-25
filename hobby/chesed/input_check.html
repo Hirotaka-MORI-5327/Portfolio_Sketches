@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>入力 - 確認 / イェソド</title>
+    <link rel="stylesheet" href="css/check.css"/>
+    <!-- <script src="js/input_high.js"></script> -->
+</head>
+<body>
+    <h1>入力</h1>
+    
+    <div id="message">
+        以下の内容で記録します。<br/>
+        よろしいですか？
+    </div>
+
+    <div id="view_High">
+        最高血圧: 
+        <span id="View_High"></span>
+    </div>
+
+    <div id="view_Low">
+        最低血圧: 
+        <span id="View_Low"></span>
+    </div>
+
+    <div id="view_Bpm">
+        心拍数: 
+        <span id="View_Bpm"></span>
+    </div>
+
+    <div id="view_Temp">
+        体温: 
+        <span id="View_Temp"></span>
+    </div>
+
+    <button id="btn_NavRw" onclick="push_NavRw()">戻る</button>
+    <button id="btn_NavWrite" onclick="push_NavWrite()">記録</button>
+
+    <script src="js/input_check.js"></script>
+</body>
+</html>

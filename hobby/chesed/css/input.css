@@ -1,0 +1,199 @@
+html{
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    display: grid;
+    /* align-items: center; */
+    margin: 0;
+    min-height: 100vh;
+    grid-template-rows: 70px 100px 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    background-color: #000000;
+}
+body > * {
+    margin: 3px;
+    padding: 10px;
+}
+h1 {
+    grid-row: 1;
+    grid-column: 1 / 13;
+    background: #449944;
+}
+
+#nav_High {
+    font-size: 20pt;
+    grid-row: 2;
+    grid-column: 1 / 4;
+    background: #994444;
+}
+
+#nav_Low {
+    font-size: 20pt;
+    grid-row: 2;
+    grid-column: 4 / 7;
+    background: #444499;
+}
+
+#nav_Bpm {
+    font-size: 20pt;
+    grid-row: 2;
+    grid-column: 7 / 10;
+    background: #449944;
+}
+
+#nav_Temp {
+    font-size: 20pt;
+    grid-row: 2;
+    grid-column: 10 / 13;
+    background: #999944;
+}
+
+#mon_Header {
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 30pt;
+    grid-row: 3;
+    grid-column: 1/13;
+}
+
+#mon_Value {
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 40pt;
+    grid-row: 4;
+    grid-column: 1/13;
+    border-color: #FFFFFF;
+    border-width: 5px;
+    border-style: solid;
+}
+
+/* #btn_Input {
+    grid-row: 2 / 3;
+    grid-column: 3 / 4;
+} */
+
+/* #btn_Hystory {
+    grid-row: 3 / 4;
+    grid-column: 3 / 4;
+} */
+
+button#btn_NavRw{
+    text-align: center;
+    line-height: 1;
+
+    grid-column:1/6;
+
+    grid-row: 10;
+    width: 200px;
+    height: 100px;
+    font-size: 50pt;
+}
+
+button#btn_NavNext{
+    text-align: center;
+    line-height: 1;
+
+    grid-column:9/13;
+
+    
+
+    grid-row: 10;
+    width: 200px;
+    height: 100px;
+    font-size: 50pt;
+}
+
+#text_LastInput{
+    text-align: center;
+    font-size: 20pt;
+    grid-row: 4 / 5;
+    grid-column: 3 / 4;
+    color: #FFFFFF;
+}
+
+button#btn_9{
+    text-align: center;
+    font-size: 40pt;
+    grid-row: 5 / 6;
+    grid-column: 9 / 11;
+}
+
+button#btn_8{
+    text-align: center;
+    font-size: 40pt;
+    grid-row: 5 / 6;
+    grid-column: 6 / 8;
+}
+
+button#btn_7{
+    text-align: center;
+    font-size: 40pt;
+    grid-row: 5 / 6;
+    grid-column: 3 / 5;
+}
+
+button#btn_6{
+    text-align: center;
+    font-size: 40pt;
+    grid-row: 6 / 7;
+    grid-column: 9 / 11;
+}
+
+button#btn_5{
+    text-align: center;
+    font-size: 40pt;
+    grid-row: 6 / 7;
+    grid-column: 6 / 8;
+}
+
+button#btn_4{
+    text-align: center;
+    font-size: 40pt;
+    grid-row: 6 / 7;
+    grid-column: 3 / 5;
+}
+
+button#btn_3{
+    text-align: center;
+    font-size: 40pt;
+    grid-row: 7 / 8;
+    grid-column: 9 / 11;
+}
+
+button#btn_2{
+    text-align: center;
+    font-size: 40pt;
+    grid-row: 7 / 8;
+    grid-column: 6 / 8;
+}
+
+button#btn_1{
+    text-align: center;
+    font-size: 40pt;
+    grid-row: 7 / 8;
+    grid-column: 3 / 5;
+}
+
+button#btn_0{
+    text-align: center;
+    font-size: 40pt;
+    grid-row: 8 / 9;
+    grid-column: 6 / 8;
+}
+
+button#btn_BS{
+    text-align: center;
+    font-size: 40pt;
+    grid-row: 8 / 9;
+    grid-column: 9 / 11;
+}
+
+#message{
+    font-size: 20pt;
+    text-align: center;
+    color: #FFFFFF;
+    grid-row: 2/3;
+    grid-column: 1/13;
+}
