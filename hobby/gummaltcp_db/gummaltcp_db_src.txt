@@ -1,0 +1,394 @@
+Option Compare Database
+
+Dim int_SecID As String
+Dim code_Section As String
+Dim int_RecordNum As Integer
+Dim str_DcountSerch As String
+
+Dim testSTR_hoge As String
+Dim testSTR_huga As String
+Dim testINT_hoge As Integer
+Dim testINT_huga As Integer
+
+
+
+
+
+Private Sub btn_RecordWrite_Click()
+
+'Forms!大会!tbx_Handler.DefaultValue = DLast("扱者", "MAIN")
+
+End Sub
+
+Private Sub cbx_Section_AfterUpdate()
+    
+    int_SecID = Forms!MAIN!cbx_Section.Value
+    
+    code_Section = DLookup("部門コード", "部門リスト", "ID=" & int_SecID)
+    
+    'str_DcountSerch = CStr(int_SecID)
+    
+    int_RecordNum = DCount("*", "MAIN", "部門ID=" & int_SecID) + 1
+    
+    Forms!MAIN!tbx_No.Value = code_Section & "-" & int_RecordNum
+    
+    
+    Dim str_TbxChrsWrite As String
+    Dim str_Section As String
+
+    str_Section = DLookup("部門", "部門リスト", "ID=" & int_SecID)
+    str_TbxChrsWrite = DLookup("コーラス数", "xC00_基本コーラス数", "部門='" & str_Section & "'")
+
+    Forms!MAIN!tbx_Chorus.Value = str_TbxChrsWrite
+    
+    
+    Me.Repaint
+
+End Sub
+
+Private Sub Form_AfterInsert()
+
+Dim str_LastRecordHndlr As String
+
+Dim str_LastRcdSectn As String
+Dim id_LastRcdSectn As Integer
+
+
+DoCmd.GoToRecord , , acNewRec
+
+id_LastReg = DMax("登録ID", "MAIN")
+
+If IsNull(DLast("扱者", "MAIN")) Then
+    str_LastRecordHndlr = ""
+
+Else
+    str_LastRecordHndlr = DLookup("扱者", "MAIN", "登録ID=" & id_LastReg)
+
+End If
+
+
+'str_LastRecordHndlr = DLast("扱者", "MAIN")
+
+Forms!MAIN!tbx_Handler.DefaultValue = "" & str_LastRecordHndlr & ""
+
+'Forms!MAIN!tbx_Handler.Text = "CDE"
+
+'Dim str_TbxHndlrWrite As String
+
+
+'str_TbxHndlrWrite = Forms!MAIN!tbx_Handler.DefaultValue
+
+'Forms!MAIN!tbx_Handler.Text = str_TbxHndlrWrite
+
+tbx_Handler.SetFocus
+
+Forms!MAIN!tbx_Handler.Text = str_LastRecordHndlr
+
+
+If IsNull(DLast("登録ID", "MAIN")) Then
+    id_LastReg = -1
+
+Else
+    id_LastReg = DMax("登録ID", "MAIN")
+
+End If
+
+tbx_RegId.SetFocus
+
+Forms!MAIN!tbx_RegId.Text = id_LastReg + 1
+
+
+
+'Dim str_TbxSectnWrite As String
+
+'id_LastRcdSectn = DLast("部門ID", "MAIN")
+id_LastRcdSectn = DLookup("部門ID", "MAIN", "登録ID=" & id_LastReg)
+    
+str_LastRcdSectn = DLookup("部門", "部門リスト", "ID=" & id_LastRcdSectn)
+
+'Forms!MAIN!cbx_Section.DefaultValue = "" & str_LastRcdSectn & ""
+
+Forms!MAIN!cbx_Section = Forms!MAIN!cbx_Section.ItemData(id_LastRcdSectn - 1)
+
+
+int_SecID = Forms!MAIN!cbx_Section.Value
+    
+    code_Section = DLookup("部門コード", "部門リスト", "ID=" & int_SecID)
+    
+    'str_DcountSerch = CStr(int_SecID)
+    
+    int_RecordNum = DCount("*", "MAIN", "部門ID=" & int_SecID) + 1
+    
+    Forms!MAIN!tbx_No.Value = code_Section & "-" & int_RecordNum
+
+
+
+
+Dim str_TbxChrsWrite As String
+Dim str_Section As String
+
+str_Section = DLookup("部門", "部門リスト", "ID=" & int_SecID)
+    str_TbxChrsWrite = DLookup("コーラス数", "xC00_基本コーラス数", "部門='" & str_Section & "'")
+
+Forms!MAIN!tbx_Chorus.Value = str_TbxChrsWrite
+
+tbx_Name.SetFocus
+
+
+Me.Repaint
+Me.Repaint
+
+End Sub
+
+Private Sub Form_AfterUpdate()
+
+Dim str_LastHndr As String
+str_LastHndr = tbx_Handler.Value
+
+Forms!大会!tbx_Handler.DefaultValue = "" & str_LastHndr & ""
+
+End Sub
+
+'Private Sub tbx_Handler_AfterUpdate()
+
+'Forms!大会!tbx_Handler.DefaultValue = """TEST"""
+
+'End Sub
+Private Sub Form_Load()
+
+'Call Fetch_LastRecord
+
+Dim str_LastRecordHndlr As String
+
+Dim str_LastRcdSectn As String
+Dim id_LastRcdSectn As Integer
+
+Dim id_Reg As Integer
+Dim id_LastReg As Integer
+
+id_LastReg = DMax("登録ID", "MAIN")
+
+
+DoCmd.GoToRecord , , acNewRec
+
+
+If IsNull(DLast("扱者", "MAIN")) Then
+    str_LastRecordHndlr = ""
+
+Else
+    str_LastRecordHndlr = DLookup("扱者", "MAIN", "登録ID=" & id_LastReg)
+
+End If
+
+
+
+Forms!MAIN!tbx_Handler.DefaultValue = "" & str_LastRecordHndlr & ""
+
+'Forms!MAIN!tbx_Handler.Text = "CDE"
+
+'Dim str_TbxHndlrWrite As String
+
+
+'str_TbxHndlrWrite = Forms!MAIN!tbx_Handler.DefaultValue
+
+'Forms!MAIN!tbx_Handler.Text = str_TbxHndlrWrite
+
+tbx_Handler.SetFocus
+
+Forms!MAIN!tbx_Handler.Text = str_LastRecordHndlr
+
+
+
+
+If IsNull(DMax("登録ID", "MAIN")) Then
+    id_LastReg = -1
+
+Else
+    id_LastReg = DMax("登録ID", "MAIN")
+
+End If
+
+tbx_RegId.SetFocus
+
+Forms!MAIN!tbx_RegId.Text = id_LastReg + 1
+
+
+
+
+
+
+'Dim str_TbxSectnWrite As String
+
+'id_LastRcdSectn = DLast("部門ID", "MAIN")
+
+
+If IsNull(DLast("部門ID", "MAIN")) Then
+    id_LastRcdSectn = 1
+
+Else
+    'id_LastRcdSectn = DLast("部門ID", "MAIN")
+    id_LastRcdSectn = DLookup("部門ID", "MAIN", "登録ID=" & id_LastReg)
+    
+
+End If
+
+
+    
+str_LastRcdSectn = DLookup("部門", "部門リスト", "ID=" & id_LastRcdSectn)
+
+'Forms!MAIN!cbx_Section.DefaultValue = "" & str_LastRcdSectn & ""
+
+Forms!MAIN!cbx_Section = Forms!MAIN!cbx_Section.ItemData(id_LastRcdSectn - 1)
+
+
+int_SecID = Forms!MAIN!cbx_Section.Value
+    
+    code_Section = DLookup("部門コード", "部門リスト", "ID=" & int_SecID)
+    
+    'str_DcountSerch = CStr(int_SecID)
+    
+    int_RecordNum = DCount("*", "MAIN", "部門ID=" & int_SecID) + 1
+    
+    Forms!MAIN!tbx_No.Value = code_Section & "-" & int_RecordNum
+
+
+
+Dim str_TbxChrsWrite As String
+
+Dim str_Section As String
+
+str_Section = DLookup("部門", "部門リスト", "ID=" & int_SecID)
+    str_TbxChrsWrite = DLookup("コーラス数", "xC00_基本コーラス数", "部門='" & str_Section & "'")
+
+Forms!MAIN!tbx_Chorus.Value = str_TbxChrsWrite
+
+
+tbx_Name.SetFocus
+
+
+Me.Repaint
+Me.Repaint
+
+
+End Sub
+
+
+
+Sub Fetch_LastRecord()
+
+'tbx_LastRecRegId
+'tbx_LastRecNo
+'tbx_LastRecRegDate
+
+'tbx_LastRecHandler
+'tbx_LastRecSection
+
+'tbx_LastRecNameFurigana
+'tbx_LastRecName
+'tbx_LastRecTel
+'tbx_LastRecZip
+'tbx_LastRecAddress
+
+'tbx_LastRecSong
+'tbx_LastRecSinger
+'tbx_LastRecLycWriter
+'tbx_LastRecComp
+'tbx_LastRecChorus
+
+'tbx_LastRecMachine
+'tbx_LastRecSongCode
+'tbx_LastRecKey
+'tbx_LastRecMedia
+
+'tbx_LastRecNote
+
+'Forms!MAIN!tbx.SetFocus
+'Forms!MAIN!tbx.Value = ""
+
+
+Dim var_LastRecRegId As String
+Dim var_LastRecNo As String
+Dim var_LastRecRegDate As String
+
+Dim var_LastRecHandler As String
+Dim var_LastRecSection As String
+
+Dim var_LastRecNameFurigana As String
+Dim var_LastRecName As String
+Dim var_LastRecTel As String
+Dim var_LastRecZip As String
+Dim var_LastRecAddress As String
+
+Dim var_LastRecSong As String
+Dim var_LastRecSinger As String
+Dim var_LastRecLycWriter As String
+Dim var_LastRecComp As String
+Dim var_LastRecChorus As String
+
+Dim var_LastRecMachine As String
+Dim var_LastRecSongCode As String
+Dim var_LastRecKey As String
+Dim var_LastRecMedia As String
+
+Dim var_LastRecNote As String
+
+
+
+Dim var_LastRecRegIdWrite As String
+Dim var_LastRecNoWrite As String
+Dim var_LastRecRegDateWrite As String
+
+Dim var_LastRecHandlerWrite As String
+Dim var_LastRecSectionWrite As String
+
+Dim var_LastRecNameFuriganaWrite As String
+Dim var_LastRecNameWrite As String
+Dim var_LastRecTelWrite As String
+Dim var_LastRecZipWrite As String
+Dim var_LastRecAddressWrite As String
+
+Dim var_LastRecSongWrite As String
+Dim var_LastRecSingerWrite As String
+Dim var_LastRecLycWriterWrite As String
+Dim var_LastRecCompWrite As String
+Dim var_LastRecChorusWrite As String
+
+Dim var_LastRecMachineWrite As String
+Dim var_LastRecSongCodeWrite As String
+Dim var_LastRecKeyWrite As String
+Dim var_LastRecMediaWrite As String
+
+Dim var_LastRecNoteWrite As String
+
+
+'===== 登録ID
+If IsNull(DLast("登録ID", "MAIN")) Then
+    var_LastRecRegId = ""
+
+Else
+    var_LastRecRegId = DLast("登録ID", "MAIN")
+
+End If
+
+tbx_LastRecRegId.SetFocus
+
+Forms!MAIN!tbx_LastRecRegId.Text = var_LastRecRegId
+
+
+
+'===== No
+If IsNull(DLast("No", "MAIN")) Then
+    var_LastRecNo = ""
+
+Else
+    var_LastRecNo = DLast("No", "MAIN")
+
+End If
+
+tbx_LastRecNo.SetFocus
+
+Forms!MAIN!tbx_LastRecNo.Text = var_LastRecNo
+
+
+
+End Sub
